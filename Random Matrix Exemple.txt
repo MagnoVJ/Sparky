@@ -1,0 +1,42 @@
+Mat4 matrizA;
+Mat4 matrizB;
+
+matrizA.elements[0 + 0 * 4] = 1.0f;
+matrizA.elements[1 + 0 * 4] = 2.0f;
+matrizA.elements[2 + 0 * 4] = 3.0f;
+matrizA.elements[3 + 0 * 4] = 4.0f;
+
+matrizA.elements[0 + 1 * 4] = 4.0f;
+matrizA.elements[1 + 1 * 4] = 3.0f;
+matrizA.elements[2 + 1 * 4] = 2.0f;
+matrizA.elements[3 + 1 * 4] = 1.0f;
+
+matrizA.elements[0 + 2 * 4] = 3.0f;
+matrizA.elements[1 + 2 * 4] = 2.0f;
+matrizA.elements[2 + 2 * 4] = 1.0f;
+matrizA.elements[3 + 2 * 4] = 4.0f;
+
+matrizA.elements[0 + 3 * 4] = 4.0f;
+matrizA.elements[1 + 3 * 4] = 2.0f;
+matrizA.elements[2 + 3 * 4] = 1.0f;
+matrizA.elements[3 + 3 * 4] = 3.0f;
+
+matrizB.elements[0 + 0 * 4] = 4.0f;
+matrizB.elements[1 + 0 * 4] = 3.0f;
+matrizB.elements[2 + 0 * 4] = 2.0f;
+matrizB.elements[3 + 0 * 4] = 1.0f;
+
+matrizB.elements[0 + 1 * 4] = 1.0f;
+matrizB.elements[1 + 1 * 4] = 2.0f;
+matrizB.elements[2 + 1 * 4] = 3.0f;
+matrizB.elements[3 + 1 * 4] = 4.0f;
+
+matrizB.elements[0 + 2 * 4] = 1.0f;
+matrizB.elements[1 + 2 * 4] = 4.0f;
+matrizB.elements[2 + 2 * 4] = 2.0f;
+matrizB.elements[3 + 2 * 4] = 3.0f;
+
+matrizB.elements[0 + 3 * 4] = 3.0f;
+matrizB.elements[1 + 3 * 4] = 2.0f;
+matrizB.elements[2 + 3 * 4] = 1.0f;
+matrizB.elements[3 + 3 * 4] = 4.0f;
