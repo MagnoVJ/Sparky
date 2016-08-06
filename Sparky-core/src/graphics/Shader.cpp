@@ -16,19 +16,24 @@ namespace sparky{
 			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-			const char* vertexSource = read_file(m_VertexPath).c_str();
-			const char* fragmentSource = read_file(m_FragmentPath).c_str();
+			std::string vertexSourceString = FileUtils::read_file(m_VertexPath);
+			std::string fragmentSourceString = FileUtils::read_file(m_FragmentPath);
+
+			const char* vertexSource = vertexSourceString.c_str();
+			const char* fragmentSource = fragmentSourceString.c_str();
 
 			glShaderSource(vertex, 1, &vertexSource, NULL);
 
 			glCompileShader(vertex);
 
 			GLint result;
+
 			glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
 
 			if(result == GL_FALSE){
 
 				GLint length;
+
 				glGetShaderiv(vertex, GL_INFO_LOG_LENGTH, &length);
 				std::vector<char> error(length);
 				glGetShaderInfoLog(vertex, length, &length, &error[0]);
@@ -67,6 +72,39 @@ namespace sparky{
 
 			return program;
 
+		}
+
+		Shader::~Shader(){
+
+			glDeleteProgram(m_ShaderID);
+		}
+
+		void Shader::setUniform1f(const GLchar* name, const float& value){
+			glUniform1f(getUniformLocation(name), value);
+		}
+
+		void Shader::setUniform1i(const GLchar* name, const int& value){
+			glUniform1i(getUniformLocation(name), value);
+		}
+
+		void Shader::setUniform2f(const GLchar* name, const maths::Vec2& vector){
+			glUniform2f(getUniformLocation(name), vector.x, vector.y);
+		}
+
+		void Shader::setUniform3f(const GLchar* name, const maths::Vec3& vector){
+			glUniform3f(getUniformLocation(name), vector.x, vector.y, vector.z);
+		}
+
+		void Shader::setUniform4f(const GLchar* name, const maths::Vec4& vector){
+			glUniform4f(getUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
+		}
+
+		void Shader::setUniformMat4(const GLchar* name, const maths::Mat4& matrix){
+			glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
+		}
+
+		GLint Shader::getUniformLocation(const GLchar* name){
+			return glGetUniformLocation(m_ShaderID, name);
 		}
 
 		void Shader::enable() const{

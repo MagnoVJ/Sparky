@@ -1,4 +1,4 @@
-﻿Build started 8/4/2016 11:22:25 PM.
+﻿Build started 8/6/2016 3:16:19 AM.
      1>Project "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\Sparky-core\Sparky-core.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D GLEW_STATIC /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Debug\Intermediates\\" /Fd"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Debug\Intermediates\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
@@ -11,12 +11,9 @@
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Debug\Intermediates\Vec2.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Debug\Intermediates\Vec3.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Debug\Intermediates\Vec4.obj"
-     1>Shader.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl sparky::read_file(char const *)" (?read_file@sparky@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBD@Z) already defined in Main.obj
-     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-     1>C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Debug\Sparky-core.exe : fatal error LNK1169: one or more multiply defined symbols found
-     1>Done Building Project "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\Sparky-core\Sparky-core.vcxproj" (Build target(s)) -- FAILED.
+         Sparky-core.vcxproj -> C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Debug\Sparky-core.exe
+     1>Done Building Project "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\Sparky-core\Sparky-core.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:01.15
+Time Elapsed 00:00:01.46

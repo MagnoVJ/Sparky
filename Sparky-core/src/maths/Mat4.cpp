@@ -147,6 +147,17 @@ namespace sparky{
 			return *this;
 		}
 
+		std::ostream& operator<<(std::ostream& stream, const Mat4& matrix){
+
+			stream << std::endl <<"|" << std::setprecision(3) << matrix.elements[0] << "\t" << std::setprecision(3) << matrix.elements[1] << "\t" << std::setprecision(3) << matrix.elements[2] << "\t" << std::setprecision(3) << matrix.elements[3] << "|" << std::endl 
+				<< "|" << std::setprecision(3) << matrix.elements[4] << "\t" << std::setprecision(3) << matrix.elements[5] << "\t" << std::setprecision(3) << matrix.elements[6] << "\t" << std::setprecision(3) << matrix.elements[7] << "|" << std::endl 
+				<< "|" << std::setprecision(3) << matrix.elements[8] << "\t" << std::setprecision(3) << matrix.elements[9] << "\t" << std::setprecision(3) << matrix.elements[10] << "\t" << std::setprecision(3) << matrix.elements[11] << "|" << std::endl 
+				<< "|" << std::setprecision(3) << matrix.elements[12] << "\t" << std::setprecision(3) << matrix.elements[13] << "\t" << std::setprecision(3) << matrix.elements[14] << "\t" << std::setprecision(3) << matrix.elements[15] << "|" << std::endl;
+
+			return stream;
+
+		}
+
 		Mat4 operator*(Mat4 left, const Mat4& right){
 
 			return left.multiply(right, "row");

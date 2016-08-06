@@ -2,6 +2,8 @@
 
 #include "maths.h"
 #include "vec4.h"
+#include <iostream>
+#include <iomanip>
 
 namespace sparky{
 
@@ -27,8 +29,10 @@ namespace sparky{
 
 			Mat4& multiply(const Mat4& other, const char* major);
 
+			friend std::ostream& operator<<(std::ostream& stream, const Mat4& matrix); 
+			
 			Mat4& operator*=(const Mat4& other);
-
+			
 			friend Mat4 operator*(Mat4 left, const Mat4& right);
 
 		};
