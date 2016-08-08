@@ -44,6 +44,9 @@ namespace sparky{
 			bool isMouseButtonPressed(unsigned int button) const;
 			void getMousePosition(double& x, double& y) const;
 
+			void setWidth(int width){ m_Width = width;}
+			void setHeight(int height){m_Height = height;}
+
 		};
 
 	}

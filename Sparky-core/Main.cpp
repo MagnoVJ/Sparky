@@ -11,7 +11,7 @@ int main(){
 
 	Window window("Sparky Engine", 960, 540);
 
-	glClearColor(1.0, 1.0, 1.0, 1.0f);
+	glClearColor(0.0, 0.0, 0.0, 1.0f);
 
 	GLfloat vertices[] = {
 
@@ -36,16 +36,19 @@ int main(){
 
 	Mat4 ortho = Mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0);
 
-	std::cout << ortho << std::endl;
-
-	shader.setUniform2f("light_pos", Vec2(4.0f, 1.5f));
-	shader.setUniform4f("colour", Vec4(0.2f, 0.3f, 0.8f, 1.0f));
 	shader.setUniformMat4("pr_matrix", ortho);
 	shader.setUniformMat4("ml_matrix", Mat4::translation(Vec3(4.0, 3.0f, 0.0f)));
+	shader.setUniform2f("light_pos", Vec2(4.0f, 1.5f));
+	shader.setUniform4f("colour", Vec4(0.2f, 0.3f, 0.8f, 1.0f));
 
 	while(!window.closed()){
 
 		window.clear();
+
+		double x, y;
+		window.getMousePosition(x, y);
+
+		shader.setUniform2f("light_pos", Vec2((float)(x * (16.0f / window.getM_Width())), (float)(9.0f - y * (9.0f / window.getM_Height()))));
 		
 		/* render primitives from array data void glDrawArrays(GLenum mode, GLint first, GLsizei count);
 		mode = Specifies what kind of primitives to render. Symbolic constants
