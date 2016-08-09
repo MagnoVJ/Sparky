@@ -22,8 +22,8 @@ namespace sparky{
 			bind();
 			buffer->bind();
 
-			glEnableVertexAttribArray(index);
 			glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
+			glEnableVertexAttribArray(index);
 
 			buffer->unbind();
 			unbind();

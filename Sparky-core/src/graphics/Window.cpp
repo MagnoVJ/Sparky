@@ -31,6 +31,11 @@ namespace sparky{
 
 		void Window::update(){
 
+			GLenum error = glGetError();
+
+			if(error != GL_NO_ERROR)
+				std::cout << "OpenGL Error: " << error << std::endl;
+
 			/*Swap front and back buffers*/
 			glfwSwapBuffers(m_Window);
 

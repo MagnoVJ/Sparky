@@ -1,6 +1,14 @@
 #include "src\maths\maths.h"
 #include "src\graphics\window.h"
 #include "src\graphics\shader.h"
+
+#include "src\graphics\buffers\buffer.h"
+#include "src\graphics\buffers\indexbuffer.h"
+#include "src\graphics\buffers\vertexarray.h"
+
+#include "src\graphics\renderable2d.h"
+#include "src\graphics\simple2drenderer.h"
+
 #include <string>
 
 int main(){
@@ -8,28 +16,44 @@ int main(){
 	using namespace sparky::maths;
 	using sparky::graphics::Window;
 	using sparky::graphics::Shader;
+	using sparky::graphics::Buffer;
+	using sparky::graphics::IndexBuffer;
+	using sparky::graphics::VertexArray;
+	using sparky::graphics::Renderable2D;
+	using sparky::graphics::Simple2DRenderer;
 
 	Window window("Sparky Engine", 960, 540);
 
 	glClearColor(0.0, 0.0, 0.0, 1.0f);
 
-	GLfloat vertices[] = {
-
-		0, 0, 0,
-		8, 0, 0,
-		0, 3, 0,
-		0, 3, 0,
-		8, 3, 0,
-		8, 0, 0
-
-	};
-
-	GLuint vbo;
-	glGenBuffers(1, &vbo); //Generate buffer object names
-	glBindBuffer(GL_ARRAY_BUFFER, vbo); //Bind a named buffer object | GL_ARRAY_BUFFER = Vertex attributes
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //Creates and initializes a buffer object's data store
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);//Define an array of generic vertex attribute data
-	glEnableVertexAttribArray(0); //Enable or disable a generic vertex attribute array
+	//GLushort indices[] = {
+	//	0, 1, 2,
+	//	2, 3, 0
+	//};
+	//GLfloat vertices[] = {
+	//	0, 0, 0,
+	//	0, 3, 0,
+	//	8, 3, 0,
+	//	8, 0, 0
+	//};
+	//GLfloat colorsA[] = {
+	//	1, 0, 1, 1,
+	//	1, 0, 1, 1,
+	//	1, 0, 1, 1,
+	//	1, 0, 1, 1
+	//};
+	//GLfloat colorsB[] = {
+	//	.2f, .3f, .8f, 1,
+	//	.2f, .3f, .8f, 1,
+	//	.2f, .3f, .8f, 1,
+	//	.2f, .3f, .8f, 1
+	//};
+	//IndexBuffer ibo(indices, 2 * 3);
+	//VertexArray sprite1, sprite2;
+	//sprite1.addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
+	//sprite1.addBuffer(new Buffer(colorsA, 4 * 4, 4), 1);
+	//sprite2.addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
+	//sprite2.addBuffer(new Buffer(colorsB, 4 * 4, 4), 1);
 
 	Shader shader("src/shaders/vertexshader.vert", "src/shaders/fragmshader.frag");
 	shader.enable();
@@ -37,9 +61,14 @@ int main(){
 	Mat4 ortho = Mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0);
 
 	shader.setUniformMat4("pr_matrix", ortho);
-	shader.setUniformMat4("ml_matrix", Mat4::translation(Vec3(4.0, 3.0f, 0.0f)));
+	//shader.setUniformMat4("ml_matrix", Mat4::translation(Vec3(8.0, 3.0f, 0.0f)));
 	shader.setUniform2f("light_pos", Vec2(4.0f, 1.5f));
-	shader.setUniform4f("colour", Vec4(0.2f, 0.3f, 0.8f, 1.0f));
+	//shader.setUniform4f("colour", Vec4(0.2f, 0.3f, 0.8f, 1.0f));
+
+	Renderable2D sprite(Vec3(5.0f, 5.0f, 0.0f), Vec2(4.0f, 4.0f), Vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
+	Renderable2D sprite2(Vec3(7.0f, 1.0f, 0.0f), Vec2(2.0f, 3.0F), Vec4(0.2f, 0.0f, 1.0f, 1.0f), shader);
+
+	Simple2DRenderer renderer;
 
 	while(!window.closed()){
 
@@ -49,12 +78,11 @@ int main(){
 		window.getMousePosition(x, y);
 
 		shader.setUniform2f("light_pos", Vec2((float)(x * (16.0f / window.getM_Width())), (float)(9.0f - y * (9.0f / window.getM_Height()))));
-		
-		/* render primitives from array data void glDrawArrays(GLenum mode, GLint first, GLsizei count);
-		mode = Specifies what kind of primitives to render. Symbolic constants
-		first = Specifies the starting index in the enabled arrays
-		count = Specifies the number of indices to be rendered*/
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		renderer.submit(&sprite);
+		renderer.submit(&sprite2);
+
+		renderer.flush();
 
 		window.update();
 	}
