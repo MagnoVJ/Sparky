@@ -13,6 +13,10 @@ namespace sparky{
 
 		}
 
+		Buffer::~Buffer(){
+			glDeleteBuffers(1, &m_BufferID);
+		}
+
 		void Buffer::bind() const{
 			glBindBuffer(GL_ARRAY_BUFFER, m_BufferID);
 		}

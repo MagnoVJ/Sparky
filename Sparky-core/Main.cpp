@@ -8,19 +8,14 @@
 
 #include "src\graphics\renderable2d.h"
 #include "src\graphics\simple2drenderer.h"
+#include "src\graphics\static_sprite.h"
 
 #include <string>
 
 int main(){
 
 	using namespace sparky::maths;
-	using sparky::graphics::Window;
-	using sparky::graphics::Shader;
-	using sparky::graphics::Buffer;
-	using sparky::graphics::IndexBuffer;
-	using sparky::graphics::VertexArray;
-	using sparky::graphics::Renderable2D;
-	using sparky::graphics::Simple2DRenderer;
+	using namespace sparky::graphics;
 
 	Window window("Sparky Engine", 960, 540);
 
@@ -65,8 +60,8 @@ int main(){
 	shader.setUniform2f("light_pos", Vec2(4.0f, 1.5f));
 	//shader.setUniform4f("colour", Vec4(0.2f, 0.3f, 0.8f, 1.0f));
 
-	Renderable2D sprite(Vec3(5.0f, 5.0f, 0.0f), Vec2(4.0f, 4.0f), Vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
-	Renderable2D sprite2(Vec3(7.0f, 1.0f, 0.0f), Vec2(2.0f, 3.0F), Vec4(0.2f, 0.0f, 1.0f, 1.0f), shader);
+	StaticSprite sprite(5.0f, 5.0f, 4.0f, 4.0f, Vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
+	StaticSprite sprite2(7.0f, 1.0f, 2.0f, 3.0f, Vec4(0.2f, 0.0f, 1.0f, 1.0f), shader);
 
 	Simple2DRenderer renderer;
 
