@@ -12,7 +12,8 @@ namespace sparky{
 
 		struct VertexData{
 			maths::Vec3 vertex;
-			maths::Vec4 color;
+			//maths::Vec4 color;
+			unsigned int color;
 		};
 
 		class Renderable2D{

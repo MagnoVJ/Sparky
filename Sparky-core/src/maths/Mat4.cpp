@@ -68,9 +68,9 @@ namespace sparky{
 
 			Mat4 result(1.0f);
 
-			result.elements[0 + 3 * 4] = vector.x;
-			result.elements[1 + 3 * 4] = vector.y;
-			result.elements[2 + 3 * 4] = vector.z;
+			result.elements[3 + 0 * 4] = vector.x;
+			result.elements[3 + 1 * 4] = vector.y;
+			result.elements[3 + 2 * 4] = vector.z;
 
 			return result;
 
@@ -119,7 +119,7 @@ namespace sparky{
 
 		Mat4& Mat4::multiply(const Mat4& other, const char* major){
 
-			Mat4 auxMat;
+			/*Mat4 auxMat;
 
 			for(int yO = 0; yO < 4; yO++){
 
@@ -143,7 +143,19 @@ namespace sparky{
 			}
 
 			*this = auxMat;
+			return *this;*/
 
+			float data[16];
+			for (int row = 0; row < 4; row++){
+				for (int col = 0; col < 4; col++){
+					float sum = 0.0f;
+					for (int e = 0; e < 4; e++){
+						sum += elements[e + row * 4] * other.elements[col + e * 4];
+					}
+					data[col + row * 4] = sum;
+				}
+			}
+			memcpy(elements, data, 4 * 4 * sizeof(float));
 			return *this;
 		}
 
@@ -171,7 +183,7 @@ namespace sparky{
 		}
 
 		float toRadians(float degrees){
-			return degrees * (M_PI/180.0f);
+			return (float)(degrees * (M_PI/180.0f));
 		}
 
 	}
