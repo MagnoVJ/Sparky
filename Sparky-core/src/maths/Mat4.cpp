@@ -7,14 +7,14 @@ namespace sparky{
 		Mat4::Mat4(){
 
 			for(int i = 0; i < 4 * 4; i++)
-				elements[i] = 0;
+				elements[i] = 0.0f;
 
 		}
 
 		Mat4::Mat4(float diagonal){
 
 			for(int i = 0; i < 4 * 4; i++)
-				elements[i] = 0;
+				elements[i] = 0.0f;
 
 			elements[0 + 0 * 4] = diagonal;
 			elements[1 + 1 * 4] = diagonal;
@@ -35,8 +35,7 @@ namespace sparky{
 
 			result.elements[0 + 0 * 4] = 2.0f / (right - left);
 			result.elements[1 + 1 * 4] = 2.0f / (top - bottom);
-			result.elements[2 + 2 * 4] = 2.0f / (near - far); 
-
+			result.elements[2 + 2 * 4] = 2.0f / (near - far);
 			result.elements[0 + 3 * 4] = (left + right) / (left - right);
 			result.elements[1 + 3 * 4] = (bottom + top) / (bottom - top);
 			result.elements[2 + 3 * 4] = (far + near) / (far - near);
@@ -68,9 +67,9 @@ namespace sparky{
 
 			Mat4 result(1.0f);
 
-			result.elements[3 + 0 * 4] = vector.x;
-			result.elements[3 + 1 * 4] = vector.y;
-			result.elements[3 + 2 * 4] = vector.z;
+			result.elements[0 + 3 * 4] = vector.x;
+			result.elements[1 + 3 * 4] = vector.y;
+			result.elements[2 + 3 * 4] = vector.z;
 
 			return result;
 
@@ -150,7 +149,7 @@ namespace sparky{
 				for (int col = 0; col < 4; col++){
 					float sum = 0.0f;
 					for (int e = 0; e < 4; e++){
-						sum += elements[e + row * 4] * other.elements[col + e * 4];
+						sum += elements[col + e * 4] * other.elements[e + row * 4];
 					}
 					data[col + row * 4] = sum;
 				}

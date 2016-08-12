@@ -86,6 +86,8 @@
     <ClCompile Include="src\graphics\buffers\Buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\Indexbuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\Vertexarray.cpp" />
+    <ClCompile Include="src\graphics\layers\Layer.cpp" />
+    <ClCompile Include="src\graphics\layers\tilelayer.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\graphics\Simple2drenderer.cpp" />
     <ClCompile Include="src\graphics\Sprite.cpp" />
@@ -101,6 +103,8 @@
     <ClInclude Include="src\graphics\buffers\buffer.h" />
     <ClInclude Include="src\graphics\buffers\indexbuffer.h" />
     <ClInclude Include="src\graphics\buffers\vertexarray.h" />
+    <ClInclude Include="src\graphics\layers\layer.h" />
+    <ClInclude Include="src\graphics\layers\tilelayer.h" />
     <ClInclude Include="src\graphics\renderable2d.h" />
     <ClInclude Include="src\graphics\renderer2d.h" />
     <ClInclude Include="src\graphics\shader.h" />

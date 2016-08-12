@@ -28,7 +28,7 @@ namespace sparky{
 			glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(struct VertexData, VertexData::color)));
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-			GLushort indices[RENDERER_INDICES_SIZE];
+			GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
 
 			int offset = 0;
 
@@ -104,7 +104,7 @@ namespace sparky{
 			glBindVertexArray(m_VAO);
 			m_IBO->bind();
 
-			glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, nullptr);
+			glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, nullptr);
 
 			glBindVertexArray(0);
 			m_IBO->unbind();
