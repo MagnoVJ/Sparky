@@ -2,6 +2,7 @@
 
 #include "static_sprite.h"
 #include "renderer2d.h"
+#include "renderable2d.h"
 
 #include <deque>
 

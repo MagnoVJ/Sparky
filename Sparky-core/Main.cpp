@@ -15,12 +15,14 @@
 #include "src\graphics\static_sprite.h"
 #include "src\graphics\sprite.h"
 #include "src\graphics\layers\tilelayer.h"
+#include "src\graphics\layers\group.h"
 
 #include <string>
 #include <vector>
 #include <time.h>
 
 #define BATCH_RENDERER 1
+#define ADD_MANY_SPRITES 0
 
 int main(){
 
@@ -31,35 +33,6 @@ int main(){
 	Window window("Sparky Engine", 960, 540);
 
 	//glClearColor(0.0, 0.0, 0.0, 1.0f);
-
-	//GLushort indices[] = {
-	//	0, 1, 2,
-	//	2, 3, 0
-	//};
-	//GLfloat vertices[] = {
-	//	0, 0, 0,
-	//	0, 3, 0,
-	//	8, 3, 0,
-	//	8, 0, 0
-	//};
-	//GLfloat colorsA[] = {
-	//	1, 0, 1, 1,
-	//	1, 0, 1, 1,
-	//	1, 0, 1, 1,
-	//	1, 0, 1, 1
-	//};
-	//GLfloat colorsB[] = {
-	//	.2f, .3f, .8f, 1,
-	//	.2f, .3f, .8f, 1,
-	//	.2f, .3f, .8f, 1,
-	//	.2f, .3f, .8f, 1
-	//};
-	//IndexBuffer ibo(indices, 2 * 3);
-	//VertexArray sprite1, sprite2;
-	//sprite1.addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
-	//sprite1.addBuffer(new Buffer(colorsA, 4 * 4, 4), 1);
-	//sprite2.addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
-	//sprite2.addBuffer(new Buffer(colorsB, 4 * 4, 4), 1);
 
 	Shader shader("src/shaders/vertexshader.vert", "src/shaders/fragmshader.frag");
 	Shader shader2("src/shaders/vertexshader.vert", "src/shaders/fragmshader.frag");
@@ -72,9 +45,28 @@ int main(){
 
 	TileLayer layer1(&shader);
 
+#if ADD_MANY_SPRITES
 	for(float y = -9.0; y < 9.0f; y+=.2f)
 		for(float x = -16.0f; x < 16.0f; x+=.2f)
 			layer1.add(new Sprite(x, y, 0.18f, 0.18f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+#else
+	/*for(float y = -9.0; y < 9.0f; y++)
+		for(float x = -16.0f; x < 16.0f; x++)
+			layer1.add(new Sprite(x, y, 0.9f, 0.9f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));*/
+
+	Mat4 transformation =  Mat4::translation(Vec3(-3.0f, -1.5f, 0.0f)) * Mat4::rotation(0.0f, Vec3(0.0f, 0.0f, 1.0f));
+
+	Group* group = new Group(transformation);
+	group->add(new Sprite(0, 0, 6, 3, Vec4(1, 1, 1, 1)));
+
+	Group* button = new Group(Mat4::translation(Vec3(0.5f, 0.5f, 0.0f)));
+	button->add(new Sprite(0.0, 0.0, 5.0f, 2.0f, Vec4(1, 0, 1, 1)));
+	button->add(new Sprite(0.5f, 0.5f, 4.0f, 1.0f, Vec4(0.2f, 0.3f, 0.8f, 1)));
+	group->add(button);
+	
+	layer1.add(group);
+
+#endif
 
 	TileLayer layer2(&shader2);
 
@@ -103,14 +95,13 @@ int main(){
 		}
 
 		shader.enable();
-		//shader.setUniform2f("light_pos", Vec2((float)(x * 32.0f / window.getM_Width() - 16.0f), (float)(9.0f - y * 18.0f / window.getM_Height())));
-		shader.setUniform2f("light_pos", Vec2(-8, -3));
+		shader.setUniform2f("light_pos", Vec2((float)(x * 32.0f / window.getM_Width() - 16.0f), (float)(9.0f - y * 18.0f / window.getM_Height())));
 
-		shader2.enable();
-		shader2.setUniform2f("light_pos", Vec2((float)(x * 32.0f / window.getM_Width() - 16.0f), (float)(9.0f - y * 18.0f / window.getM_Height())));
+		//shader2.enable();
+		//shader2.setUniform2f("light_pos", Vec2((float)(x * 32.0f / window.getM_Width() - 16.0f), (float)(9.0f - y * 18.0f / window.getM_Height())));
 
 		layer1.render();
-		layer2.render();
+		//layer2.render();
 
 		window.update();
 
@@ -121,7 +112,7 @@ int main(){
 			counter = 0;
 		}
 		
-		printf("%d FPS\n", frames==0?counter:frames);
+		//printf("%d FPS\n", frames==0?counter:frames);
 
 	}
 

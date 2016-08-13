@@ -181,8 +181,41 @@ namespace sparky{
 
 		}
 
+		Vec3 operator*(const Mat4& left, const Vec3& right){
+
+			return left.multiply(right);
+
+		}
+
+		Vec4 operator*(const Mat4& left, const Vec4& right){
+
+			return left.multiply(right);
+
+		}
+
 		float toRadians(float degrees){
 			return (float)(degrees * (M_PI/180.0f));
+		}
+
+		Vec3 Mat4::multiply(const Vec3& other) const{
+
+			return Vec3(
+				columns[0].x * other.x + columns[1].x * other.y + columns[2].x * other.z + columns[3].x,
+				columns[0].y * other.x + columns[1].y * other.y + columns[2].y * other.z + columns[3].y,
+				columns[0].z * other.x + columns[1].z * other.y + columns[2].z * other.z + columns[3].z
+				);
+
+		}
+
+		Vec4 Mat4::multiply(const Vec4& other) const{
+
+			return Vec4(
+				columns[0].x * other.x + columns[1].x * other.y + columns[2].x * other.z + columns[3].x * other.w,
+				columns[0].y * other.x + columns[1].y * other.y + columns[2].y * other.z + columns[3].y * other.w,
+				columns[0].z * other.x + columns[1].z * other.y + columns[2].z * other.z + columns[3].z * other.w,
+				columns[0].w * other.x + columns[1].w * other.y + columns[2].w * other.z + columns[3].w * other.w
+				);
+
 		}
 
 	}

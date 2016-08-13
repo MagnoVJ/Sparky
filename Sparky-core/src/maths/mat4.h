@@ -35,6 +35,12 @@ namespace sparky{
 			
 			friend Mat4 operator*(Mat4 left, const Mat4& right);
 
+			Vec3 multiply(const Vec3& other) const;
+			friend Vec3 operator*(const Mat4& left, const Vec3& right);
+
+			Vec4 multiply(const Vec4& other) const;
+			friend Vec4 operator*(const Mat4& left, const Vec4& right);
+
 		};
 
 		float toRadians(float degrees);
