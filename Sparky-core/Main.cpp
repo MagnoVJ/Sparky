@@ -16,14 +16,16 @@
 #include "src\graphics\sprite.h"
 #include "src\graphics\layers\tilelayer.h"
 #include "src\graphics\layers\group.h"
+#include "src\graphics\texture.h"
 
+#include <FreeImage.h>
 #include <string>
 #include <vector>
 #include <time.h>
 
 #define BATCH_RENDERER 1
-#define ADD_MANY_SPRITES 0
 
+#if 1
 int main(){
 
 	using namespace sparky::maths;
@@ -35,54 +37,31 @@ int main(){
 	//glClearColor(0.0, 0.0, 0.0, 1.0f);
 
 	Shader shader("src/shaders/vertexshader.vert", "src/shaders/fragmshader.frag");
-	Shader shader2("src/shaders/vertexshader.vert", "src/shaders/fragmshader.frag");
 
 	shader.enable();
-	shader2.enable();
-
+	shader.setUniformMat4("pr_matrix", Mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 	shader.setUniform2f("light_pos", Vec2(4.0f, 1.5f));
-	shader2.setUniform2f("light_pos", Vec2(4.0f, 1.5f));
 
 	TileLayer layer1(&shader);
 
-#if ADD_MANY_SPRITES
-	for(float y = -9.0; y < 9.0f; y+=.2f)
-		for(float x = -16.0f; x < 16.0f; x+=.2f)
-			layer1.add(new Sprite(x, y, 0.18f, 0.18f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
-#else
-	/*for(float y = -9.0; y < 9.0f; y++)
+	for(float y = -9.0; y < 9.0f; y++)
 		for(float x = -16.0f; x < 16.0f; x++)
-			layer1.add(new Sprite(x, y, 0.9f, 0.9f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));*/
-
-	Mat4 transformation =  Mat4::translation(Vec3(-3.0f, -1.5f, 0.0f)) * Mat4::rotation(0.0f, Vec3(0.0f, 0.0f, 1.0f));
-
-	Group* group = new Group(transformation);
-	group->add(new Sprite(0, 0, 6, 3, Vec4(1, 1, 1, 1)));
-
-	Group* button = new Group(Mat4::translation(Vec3(0.5f, 0.5f, 0.0f)));
-	button->add(new Sprite(0.0, 0.0, 5.0f, 2.0f, Vec4(1, 0, 1, 1)));
-	button->add(new Sprite(0.5f, 0.5f, 4.0f, 1.0f, Vec4(0.2f, 0.3f, 0.8f, 1)));
-	group->add(button);
+			layer1.add(new Sprite(x, y, 0.9f, 0.9f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 	
-	layer1.add(group);
-
-#endif
-
-	TileLayer layer2(&shader2);
-
-	layer2.add(new Sprite(-2, -2, 4, 4, Vec4(1, 0, 1, 1)));
+	glActiveTexture(GL_TEXTURE0);
+	Texture texture("test.png");
 
 	srand(time(NULL));
 
 	Timer timerFPS;
+
 	unsigned int counter = 0, frames = 0;
 
 	while(!window.closed()){
 
-		/*Mat4 mat = Mat4::translation(Vec3(8, 4.5, 0));
-		mat *= Mat4::rotation(timerFPS.elapsed() * 50.0f, Vec3(0, 0, 1));
-		mat *= Mat4::translation(Vec3(-8, -4.5, 0));
-		shader.setUniformMat4("ml_matrix", mat);*/
+		texture.bind();
+		shader.enable();
+		shader.setUniform1i("tex", 0);
 
 		window.clear();
 
@@ -97,11 +76,7 @@ int main(){
 		shader.enable();
 		shader.setUniform2f("light_pos", Vec2((float)(x * 32.0f / window.getM_Width() - 16.0f), (float)(9.0f - y * 18.0f / window.getM_Height())));
 
-		//shader2.enable();
-		//shader2.setUniform2f("light_pos", Vec2((float)(x * 32.0f / window.getM_Width() - 16.0f), (float)(9.0f - y * 18.0f / window.getM_Height())));
-
 		layer1.render();
-		//layer2.render();
 
 		window.update();
 
@@ -117,3 +92,64 @@ int main(){
 	}
 
 }
+
+#else
+int main(){
+
+	const char* filename = "teste.png";
+
+	//image format
+	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+	//pointer to the image, once loaded
+	FIBITMAP *dib(0);
+	//pointer to the image data
+	BYTE* bits(0);
+	//image width and height
+	unsigned int width(0), height(0);
+	//OpenGL's image ID to map to
+	GLuint gl_texID;
+	
+	//check the file signature and deduce its format
+	fif = FreeImage_GetFileType(filename, 0);
+	//if still unknown, try to guess the file format from the file extension
+	if(fif == FIF_UNKNOWN) 
+		fif = FreeImage_GetFIFFromFilename(filename);
+	//if still unkown, return failure
+	if(fif == FIF_UNKNOWN)
+		return false;
+
+	//check that the plugin has reading capabilities and load the file
+	if(FreeImage_FIFSupportsReading(fif))
+		dib = FreeImage_Load(fif, filename);
+	//if the image failed to load, return failure
+	if(!dib)
+		return false;
+
+	//retrieve the image data
+	bits = FreeImage_GetBits(dib);
+	//get the image width and height
+	width = FreeImage_GetWidth(dib);
+	height = FreeImage_GetHeight(dib);
+	//if this somehow one of these failed (they shouldn't), return failure
+	if((bits == 0) || (width == 0) || (height == 0))
+		return false;
+
+	unsigned int pitch = FreeImage_GetPitch(dib);
+
+	bits += pitch * (height - 1);
+
+	for(int y = 0; y < height; y++){
+		BYTE* pixel = bits;
+		for(int x = 0; x < width; x++){
+			printf("%d %d %d\n", +pixel[FI_RGBA_RED], +pixel[FI_RGBA_GREEN], +pixel[FI_RGBA_BLUE]);
+			pixel += 3;
+		}
+		bits -= pitch;
+	}
+
+	FreeImage_Unload(dib);
+	
+	system("PAUSE");
+
+}
+#endif
