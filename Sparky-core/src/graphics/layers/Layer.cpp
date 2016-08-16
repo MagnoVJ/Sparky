@@ -27,7 +27,7 @@ namespace sparky{
 
 			m_Renderables.push_back(renderable);
 
-		}
+		} 
 
 		void Layer::render(){
 

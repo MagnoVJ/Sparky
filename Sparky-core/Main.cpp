@@ -44,12 +44,28 @@ int main(){
 
 	TileLayer layer1(&shader);
 
+	Texture ta("ta.png");
+	Texture tb("tb.png");
+
+	Texture* textures[] = {
+		new Texture("ta.png"),
+		new Texture("tb.png"),
+		new Texture("tc.png")
+	};
+
+	//rand ()%2==0?&ta:&tb
 	for(float y = -9.0; y < 9.0f; y++)
 		for(float x = -16.0f; x < 16.0f; x++)
-			layer1.add(new Sprite(x, y, 0.9f, 0.9f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
-	
-	glActiveTexture(GL_TEXTURE0);
-	Texture texture("test.png");
+			if(rand() % 4 == 0)
+				layer1.add(new Sprite(x, y, 0.9f, 0.9f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+			else
+				layer1.add(new Sprite(x, y, 0.9f, 0.9f, textures[rand() % 3]));
+
+
+	GLint texIDs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+	shader.enable();
+	shader.setUniform1iv("textures", texIDs, 10);
 
 	srand(time(NULL));
 
@@ -59,21 +75,12 @@ int main(){
 
 	while(!window.closed()){
 
-		texture.bind();
-		shader.enable();
-		shader.setUniform1i("tex", 0);
-
 		window.clear();
 
 		double x, y;
 		window.getMousePosition(x, y);
+		if((x < 0 || x > window.getM_Width() || _isnan(x)) || (y < 0 || y > window.getM_Height() || _isnan(y))){x = 0; y = 0;}
 
-		if((x < 0 || x > window.getM_Width() || _isnan(x)) || (y < 0 || y > window.getM_Height() || _isnan(y))){
-			x = 0;
-			y = 0;
-		}
-
-		shader.enable();
 		shader.setUniform2f("light_pos", Vec2((float)(x * 32.0f / window.getM_Width() - 16.0f), (float)(9.0f - y * 18.0f / window.getM_Height())));
 
 		layer1.render();
