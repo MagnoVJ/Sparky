@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,5 +144,16 @@
   <ItemGroup>
     <None Include="src\shaders\fragmshader.frag" />
     <None Include="src\shaders\vertexshader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="tb.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ta.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tc.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -37,16 +37,18 @@ namespace sparky{
 			std::vector<maths::Vec2> m_UV;
 			Texture* m_Texture;
 
+		protected:
+			Renderable2D(){
+				setUVDefaults();
+			}
+
 		//Methods 
 		public:
 			Renderable2D(maths::Vec3 position, maths::Vec2 size, maths::Vec4 color) :
 				m_Position(position), m_Size(size), m_Color(color){ 
 					setUVDefaults();
 			}
-
-			Renderable2D(){
-				setUVDefaults();
-			}
+			
 
 			virtual ~Renderable2D(){ }
 

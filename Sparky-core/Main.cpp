@@ -44,23 +44,14 @@ int main(){
 
 	TileLayer layer1(&shader);
 
-	Texture ta("ta.png");
-	Texture tb("tb.png");
-
-	Texture* textures[] = {
-		new Texture("ta.png"),
-		new Texture("tb.png"),
-		new Texture("tc.png")
-	};
-
-	//rand ()%2==0?&ta:&tb
+	Texture* textures[] = {new Texture("ta.png"), new Texture("tb.png"), new Texture("tc.png")};
+	
 	for(float y = -9.0; y < 9.0f; y++)
 		for(float x = -16.0f; x < 16.0f; x++)
 			if(rand() % 4 == 0)
-				layer1.add(new Sprite(x, y, 0.9f, 0.9f, Vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+				layer1.add(new Sprite(x, y, 0.9f, 0.9f, Vec4(rand() % 1000 / 1000.f, 0, 1, 1)));
 			else
-				layer1.add(new Sprite(x, y, 0.9f, 0.9f, textures[rand() % 3]));
-
+				layer1.add(new Sprite(x, y, 0.9f, 0.9f, textures[rand ()%3]));
 
 	GLint texIDs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
@@ -97,6 +88,9 @@ int main(){
 		//printf("%d FPS\n", frames==0?counter:frames);
 
 	}
+
+	for(int i = 0; i < 3; i++)
+		delete textures[i];
 
 }
 

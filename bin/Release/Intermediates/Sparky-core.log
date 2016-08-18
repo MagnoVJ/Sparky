@@ -1,23 +1,11 @@
-﻿Build started 8/12/2016 11:11:04 PM.
+﻿Build started 8/17/2016 9:56:33 AM.
      1>Project "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\Sparky-core\Sparky-core.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Ob2 /Oi /Ot /Oy- /GL /D GLEW_STATIC /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /Fo"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\\" /Fd"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp src\graphics\Batchrenderer2d.cpp src\graphics\layers\Group.cpp src\graphics\layers\Layer.cpp src\graphics\layers\tilelayer.cpp src\graphics\Simple2drenderer.cpp src\graphics\Sprite.cpp src\graphics\Static_sprite.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Ob2 /Oi /Ot /Oy- /GL /D GLEW_STATIC /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /Fo"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\\" /Fd"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
          Main.cpp
-     1>Main.cpp(75): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-         Batchrenderer2d.cpp
-     1>src\graphics\Batchrenderer2d.cpp(68): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
-     1>src\graphics\Batchrenderer2d.cpp(69): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
-     1>src\graphics\Batchrenderer2d.cpp(70): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
-     1>src\graphics\Batchrenderer2d.cpp(71): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
-         Group.cpp
-         Layer.cpp
-     1>src\graphics\layers\Layer.cpp(21): warning C4018: '<' : signed/unsigned mismatch
-         tilelayer.cpp
-         Simple2drenderer.cpp
-         Sprite.cpp
-         Static_sprite.cpp
+     1>Main.cpp(61): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Sparky-core.exe" /NOLOGO glfw3.lib glew32s.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Sparky-core.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Sparky-core.lib" /MACHINE:X86 /SAFESEH "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Main.obj"
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Sparky-core.exe" /NOLOGO glfw3.lib glew32s.lib opengl32.lib FreeImage.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Sparky-core.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Sparky-core.lib" /MACHINE:X86 /SAFESEH "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Main.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Batchrenderer2d.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Buffer.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Indexbuffer.obj"
@@ -29,6 +17,7 @@
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Simple2drenderer.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Sprite.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Static_sprite.obj"
+         "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Texture.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Window.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Mat4.obj"
          "C:\Users\MagnoVJ\documents\visual studio 2012\Projects\Sparky\bin\Release\Intermediates\Vec2.obj"
@@ -43,4 +32,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.81
+Time Elapsed 00:00:02.32

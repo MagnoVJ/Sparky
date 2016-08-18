@@ -28,19 +28,16 @@ namespace sparky{
 			static Mat4 scale(const Vec3& vector);
 
 			Mat4& multiply(const Mat4& other, const char* major);
-
-			friend std::ostream& operator<<(std::ostream& stream, const Mat4& matrix); 
-			
-			Mat4& operator*=(const Mat4& other);
-			
-			friend Mat4 operator*(Mat4 left, const Mat4& right);
-
 			Vec3 multiply(const Vec3& other) const;
-			friend Vec3 operator*(const Mat4& left, const Vec3& right);
-
 			Vec4 multiply(const Vec4& other) const;
+
+			friend Mat4 operator*(Mat4 left, const Mat4& right);
+			friend Vec3 operator*(const Mat4& left, const Vec3& right);
 			friend Vec4 operator*(const Mat4& left, const Vec4& right);
 
+			Mat4& operator*=(const Mat4& other);
+			friend std::ostream& operator<<(std::ostream& stream, const Mat4& matrix); 
+			
 		};
 
 		float toRadians(float degrees);

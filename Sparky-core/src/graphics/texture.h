@@ -28,9 +28,9 @@ namespace sparky{
 			void bind() const;
 			void unbind() const;
 
-			inline const GLuint getTextureID() const {return m_TextureID;} 
-			inline const unsigned int getWidth() const {return m_Width;}
-			inline const unsigned int getHeight() const {return m_Height;}
+			inline const GLuint getTextureID() const {return m_TextureID;}  
+			inline const GLuint getWidth() const {return m_Width;}
+			inline const GLuint getHeight() const {return m_Height;}
 
 		};
 
